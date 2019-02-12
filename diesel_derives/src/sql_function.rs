@@ -1,5 +1,3 @@
-#![allow(dead_code, unused_variables)]
-
 use proc_macro2::*;
 use quote::ToTokens;
 use syn::parse::{self, Parse, ParseStream};
@@ -8,6 +6,8 @@ use syn::punctuated::Punctuated;
 use meta::*;
 use util::*;
 
+// Extremely curious why this triggers on a nearly branchless function
+#[allow(clippy::cyclomatic_complexity)]
 pub(crate) fn expand(input: SqlFunctionDecl) -> Result<TokenStream, Diagnostic> {
     let SqlFunctionDecl {
         mut attributes,
